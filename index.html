@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Library</h1>
+    <button id="show" onclick="showForm()">+</button>
+    <form id="addForm" action="">
+        <p>Title:</p>
+        <input type="text" id="form-title" required>
+        <p>Author:</p>
+        <input type="text" id="form-author" required>
+        <p>Pages: </p>
+        <input type="number" id="form-pages" required>
+        <p>Read</p>
+        <input type="checkbox" id="form-read">
+        <button type="button" id="add" onclick="addBookToLibrary()">Add Book</button>
+    </form>
+    <h3>Your Books:</h3>
+    <div id="books">
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
