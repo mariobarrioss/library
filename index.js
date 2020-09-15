@@ -18,45 +18,91 @@ const resetForm = () => {
   document.querySelector('[name="book-status"]').checked = false;
 };
 
+const changeBookStatus = (book, button) => {
+  if (book.status === 'Already read!') {
+    book.status = 'Not read yet!';
+    button.innerHTML = book.status;
+    button.classList.remove('is-success');
+  } else {
+    book.status = 'Already read!';
+    button.innerHTML = book.status;
+    button.classList.add('is-success');
+  }
+  storeLibrary();
+};
+
+const removeBook = (bookIndex) => {
+  localStorage.clear();
+  myLibrary.splice(bookIndex, 1);
+  storeLibrary();
+};
+
+const addChangeListeners = () => {
+  const changeButtons = document.querySelectorAll('.change-btn');
+  changeButtons.forEach((button) => {
+    button.onclick = () => {
+      const { dataset: { bookIndex } } = button;
+      const book = myLibrary[bookIndex];
+      changeBookStatus(book, button);
+    };
+  });
+};
+
+const addDeleteListeners = () => {
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  deleteButtons.forEach((button) => {
+    button.onclick = () => {
+      const { dataset: { bookIndex } } = button;
+      const targetBook = document.querySelector(`li[data-book-index="${bookIndex}"]`);
+      removeBook(bookIndex);
+      inventory.removeChild(targetBook);
+    };
+  });
+};
+
 const createInventory = (library) => {
   inventory.innerHTML = '';
   library.forEach((book) => {
+    const li = document.createElement('li');
+    li.className = 'column is-full-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd';
     const bookIndex = library.indexOf(book);
+    li.setAttribute('data-book-index', `${bookIndex}`);
     const statusColor = book.status === 'Already read!' ? 'is-success' : '';
-    const bookContent = `<li class="column is-full-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
-                          <div class="card">
-                            <div class="card-image">
-                              <figure class="image is-4by3">
-                                <img src="./assets/images/default-cover.jpg" alt="Book cover">
-                              </figure>
-                            </div>
-                            <div class="card-content">
-                              <div class="media">
-                                <div class="media-left">
-                                  <figure class="image is-48x48">
-                                    <img src="./assets/images/default-thumbnail.jpg" alt="Book thumbnail">
-                                  </figure>
-                                </div>
-                                <div class="media-content">
-                                  <p class="title is-4">${book.title}</p>
-                                  <p class="subtitle is-6">${book.author}</p>
-                                </div>
-                              </div>
-
-                              <div class="content">
-                                Number of pages:
-                                <br>
-                                ${book.pages}
-                              </div>
-                            </div>
-                            <footer class="card-footer">
-                              <button data-book-index="${bookIndex}" class="button ${statusColor} card-footer-item" onclick="changeBookStatus(${bookIndex});">${book.status}</button>
-                              <button class="button is-danger card-footer-item" onclick="removeBook(${bookIndex});">Delete</button>
-                            </footer>
+    const bookContent = `<div class="card">
+                          <div class="card-image">
+                            <figure class="image is-4by3">
+                              <img src="./assets/images/default-cover.jpg" alt="Book cover">
+                            </figure>
                           </div>
-                        </li>`;
-    inventory.insertAdjacentHTML('beforeend', bookContent);
+                          <div class="card-content">
+                            <div class="media">
+                              <div class="media-left">
+                                <figure class="image is-48x48">
+                                  <img src="./assets/images/default-thumbnail.jpg" alt="Book thumbnail">
+                                </figure>
+                              </div>
+                              <div class="media-content">
+                                <p class="title is-4">${book.title}</p>
+                                <p class="subtitle is-6">${book.author}</p>
+                              </div>
+                            </div>
+
+                            <div class="content">
+                              Number of pages:
+                              <br>
+                              ${book.pages}
+                            </div>
+                          </div>
+                          <footer class="card-footer">
+                            <button data-book-index="${bookIndex}" class="button ${statusColor} change-btn card-footer-item">${book.status}</button>
+                            <button data-book-index="${bookIndex}" class="button is-danger delete-btn card-footer-item" >Delete</button>
+                          </footer>
+                        </div>`;
+    li.insertAdjacentHTML('beforeend', bookContent);
+    inventory.appendChild(li);
   });
+  addChangeListeners();
+  addDeleteListeners();
 };
 
 const addBookToLibrary = () => {
@@ -82,24 +128,5 @@ saveButton.addEventListener('click', () => {
   bookFormToggle();
   addBookToLibrary();
 });
-
-const changeBookStatus = (bookIndex) => {
-  const book = myLibrary[bookIndex];
-
-  if (book.status === 'Already read!') {
-    book.status = 'Not read yet!';
-  } else {
-    book.status = 'Already read!';
-  }
-  storeLibrary();
-  createInventory(myLibrary);
-};
-
-const removeBook = (bookIndex) => {
-  localStorage.clear();
-  myLibrary.splice(bookIndex, 1);
-  storeLibrary();
-  createInventory(myLibrary);
-};
 
 createInventory(myLibrary);
