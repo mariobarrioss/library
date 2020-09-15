@@ -3,12 +3,13 @@ const inventory = document.querySelector('#inventory');
 
 const storeLibrary = () => localStorage.setItem('library', JSON.stringify(myLibrary));
 
-function Book(title, author, pages, status) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.status = status === true ? 'Already read!' : 'Not read yet!';
-  this.info = () => `${this.title}, by ${this.author}, ${this.pages} pages, ${this.status}.`;
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status === true ? 'Already read!' : 'Not read yet!';
+  }
 }
 
 const resetForm = () => {
