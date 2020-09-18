@@ -1,4 +1,4 @@
-const myLibrary = localStorage.getItem('library') ? JSON.parse(localstorage.getItem('library')) : [];
+const myLibrary = localStorage.getItem('library') ? JSON.parse(localStorage.getItem('library')) : [];
 const inventory = document.querySelector('#inventory');
 
 const storeLibrary = () => localStorage.setItem('library', JSON.stringify(myLibrary));
