@@ -25,7 +25,7 @@ const changeBookStatus = (book, button) => {
     button.innerHTML = book.status;
     button.classList.remove('is-success');
   } else {
-    book.status = 'Already Read!';
+    book.status = 'Already read!';
     button.innerHTML = book.status;
     button.classList.add('is-success');
   }
