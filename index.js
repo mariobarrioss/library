@@ -72,14 +72,14 @@ const createInventory = (library) => {
     const bookContent = `<div class="card">
                           <div class="card-image">
                             <figure class="image is-4by3">
-                              <img src="./assets/images/default-cover.jpg" alt="Book cover">
+                              <img src="https://source.unsplash.com/t7zYZzO_CX0/1600x900" alt="Book cover">
                             </figure>
                           </div>
                           <div class="card-content">
                             <div class="media">
                               <div class="media-left">
                                 <figure class="image is-48x48">
-                                  <img src="./assets/images/default-thumbnail.jpg" alt="Book thumbnail">
+                                  <img src="https://source.unsplash.com/-FVaZbu6ZAE/1600x900" alt="Book thumbnail">
                                 </figure>
                               </div>
                               <div class="media-content">
