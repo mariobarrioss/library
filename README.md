@@ -16,6 +16,9 @@ A simple vanila Javascript, HTML, and CSS3, project which allows users to add bo
 The book database will be stored in the users localstorage.
 
 ![screenshot](./assets/screenshot.png)
+
+## Live Demo
+[Library](https://rawcdn.githack.com/mariobarrioss/library/6fc9c391ecace0a5a44610a2a937800d75af4f8a/index.html)
 <!-- INSTALLATION -->
 ## Installation
 
