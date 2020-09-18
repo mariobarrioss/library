@@ -15,6 +15,7 @@
 A simple vanila Javascript, HTML, and CSS3, project which allows users to add books to their personal library and track read books. 
 The book database will be stored in the users localstorage.
 
+![screenshot](./assets/screenshot.png)
 <!-- INSTALLATION -->
 ## Installation
 
