@@ -26,6 +26,10 @@ function resetForm() {
   document.querySelector('#error').textContent = '';
 }
 
+function validateInput(title, author, pages) {
+  return !!title.match(/\S+/g) && !!author.match(/\S+/g) && parseInt(pages, 10) >= 1;
+}
+
 function errorMessage() {
   const error = document.querySelector('#error');
   error.textContent = 'Title, Author and Pages are required fields!';
@@ -123,7 +127,7 @@ function addBookToLibrary() {
   const author = document.querySelector('[name="book-author"]').value;
   const pages = document.querySelector('[name="book-pages"]').value;
 
-  if (title && author && pages) {
+  if (validateInput(title, author, pages)) {
     const status = document.querySelector('[name="book-status"]').checked;
     const book = new Book(title, author, pages, status);
     myLibrary.push(book);
