@@ -8,7 +8,7 @@ class Book {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.status = status === true ? 'Already Read!' : 'Not read yet!';
+    this.status = status === true ? 'Already read!' : 'Not read yet!';
   }
 }
 
