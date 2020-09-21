@@ -12,11 +12,24 @@ class Book {
   }
 }
 
+const addNewButton = document.querySelector('#new-book-btn');
+const bookForm = document.querySelector('#book-form');
+
+const bookFormToggle = () => bookForm.classList.toggle('is-hidden');
+addNewButton.addEventListener('click', () => bookFormToggle());
+
 function resetForm() {
   document.querySelector('[name="book-title"]').value = '';
   document.querySelector('[name="book-author"]').value = '';
   document.querySelector('[name="book-pages"]').value = '';
   document.querySelector('[name="book-status"]').checked = false;
+  document.querySelector('#error').textContent = '';
+}
+
+function errorMessage() {
+  const error = document.querySelector('#error');
+  error.textContent = 'Title, Author and Pages are required fields!';
+  error.style.color = 'red';
 }
 
 function changeBookStatus(book, button) {
@@ -109,23 +122,22 @@ function addBookToLibrary() {
   const title = document.querySelector('[name="book-title"]').value;
   const author = document.querySelector('[name="book-author"]').value;
   const pages = document.querySelector('[name="book-pages"]').value;
-  const status = document.querySelector('[name="book-status"]').checked;
-  const book = new Book(title, author, pages, status);
-  myLibrary.push(book);
-  createInventory(myLibrary);
-  resetForm();
-  storeLibrary();
+
+  if (title && author && pages) {
+    const status = document.querySelector('[name="book-status"]').checked;
+    const book = new Book(title, author, pages, status);
+    myLibrary.push(book);
+    createInventory(myLibrary);
+    resetForm();
+    storeLibrary();
+    bookFormToggle();
+  } else {
+    errorMessage();
+  }
 }
-
-const addNewButton = document.querySelector('#new-book-btn');
-const bookForm = document.querySelector('#book-form');
-
-const bookFormToggle = () => bookForm.classList.toggle('is-hidden');
-addNewButton.addEventListener('click', () => bookFormToggle());
 
 const saveButton = document.querySelector('#save-button');
 saveButton.addEventListener('click', () => {
-  bookFormToggle();
   addBookToLibrary();
 });
 
