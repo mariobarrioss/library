@@ -17,7 +17,7 @@ function resetForm() {
   document.querySelector('[name="book-author"]').value = '';
   document.querySelector('[name="book-pages"]').value = '';
   document.querySelector('[name="book-status"]').checked = false;
-};
+}
 
 function changeBookStatus(book, button) {
   if (book.status === 'Already read!') {
@@ -30,13 +30,13 @@ function changeBookStatus(book, button) {
     button.classList.add('is-success');
   }
   storeLibrary();
-};
+}
 
 function removeBook(bookIndex) {
   localStorage.clear();
   myLibrary.splice(bookIndex, 1);
   storeLibrary();
-};
+}
 
 function addChangeListeners() {
   const changeButtons = document.querySelectorAll('.change-btn');
@@ -47,7 +47,7 @@ function addChangeListeners() {
       changeBookStatus(book, button);
     };
   });
-};
+}
 
 function addDeleteListeners() {
   const deleteButtons = document.querySelectorAll('.delete-btn');
@@ -59,7 +59,7 @@ function addDeleteListeners() {
       inventory.removeChild(targetBook);
     };
   });
-};
+}
 
 function createInventory(library) {
   inventory.innerHTML = '';
@@ -103,7 +103,7 @@ function createInventory(library) {
   });
   addChangeListeners();
   addDeleteListeners();
-};
+}
 
 function addBookToLibrary() {
   const title = document.querySelector('[name="book-title"]').value;
@@ -115,7 +115,7 @@ function addBookToLibrary() {
   createInventory(myLibrary);
   resetForm();
   storeLibrary();
-};
+}
 
 const addNewButton = document.querySelector('#new-book-btn');
 const bookForm = document.querySelector('#book-form');
