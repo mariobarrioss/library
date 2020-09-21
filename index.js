@@ -12,14 +12,14 @@ class Book {
   }
 }
 
-const resetForm = () => {
+function resetForm() {
   document.querySelector('[name="book-title"]').value = '';
   document.querySelector('[name="book-author"]').value = '';
   document.querySelector('[name="book-pages"]').value = '';
   document.querySelector('[name="book-status"]').checked = false;
 };
 
-const changeBookStatus = (book, button) => {
+function changeBookStatus(book, button) {
   if (book.status === 'Already read!') {
     book.status = 'Not read yet!';
     button.innerHTML = book.status;
@@ -32,13 +32,13 @@ const changeBookStatus = (book, button) => {
   storeLibrary();
 };
 
-const removeBook = (bookIndex) => {
+function removeBook(bookIndex) {
   localStorage.clear();
   myLibrary.splice(bookIndex, 1);
   storeLibrary();
 };
 
-const addChangeListeners = () => {
+function addChangeListeners() {
   const changeButtons = document.querySelectorAll('.change-btn');
   changeButtons.forEach((button) => {
     button.onclick = () => {
@@ -49,7 +49,7 @@ const addChangeListeners = () => {
   });
 };
 
-const addDeleteListeners = () => {
+function addDeleteListeners() {
   const deleteButtons = document.querySelectorAll('.delete-btn');
   deleteButtons.forEach((button) => {
     button.onclick = () => {
@@ -61,7 +61,7 @@ const addDeleteListeners = () => {
   });
 };
 
-const createInventory = (library) => {
+function createInventory(library) {
   inventory.innerHTML = '';
   library.forEach((book) => {
     const li = document.createElement('li');
@@ -105,7 +105,7 @@ const createInventory = (library) => {
   addDeleteListeners();
 };
 
-const addBookToLibrary = () => {
+function addBookToLibrary() {
   const title = document.querySelector('[name="book-title"]').value;
   const author = document.querySelector('[name="book-author"]').value;
   const pages = document.querySelector('[name="book-pages"]').value;
